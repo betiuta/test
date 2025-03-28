@@ -7,8 +7,48 @@
   </head>
   <body>
     <a-scene>
-      <a-sky src="./im/te.jpg" rotation="0 -130 0"></a-sky>
-      <a-entity camera look-controls position="0 1.6 0"></a-entity>
+      <!-- Imaginea 360 -->
+      <a-sky src="./im/te.jpg" rotation="0 50 0"></a-sky>
+
+      <!-- Cameră + cursor VR -->
+      <a-entity 
+        camera 
+        look-controls 
+        position="0 1.6 0">
+        <a-entity 
+          cursor="fuse: true; fuseTimeout: 1500" 
+          position="0 0 -1" 
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: white; shader: flat"
+          raycaster="objects: .clickable">
+        </a-entity>
+      </a-entity>
+
+      <!-- Hotspot pe care apeși -->
+      <a-entity id="hotspot"
+        geometry="primitive: circle; radius: 0.5"
+        material="color: red; opacity: 0.7"
+        position="2 2 -4"
+        class="clickable"
+        onclick="showMessage();"
+        rotation="-90 0 0">
+      </a-entity>
+
+      <!-- Textul care apare la click -->
+      <a-text id="welcomeText"
+        value="Bine ați venit la FILS!"
+        align="center"
+        position="0 2 -3"
+        width="6"
+        visible="false">
+      </a-text>
     </a-scene>
+
+    <script>
+      function showMessage() {
+        const text = document.getElementById("welcomeText");
+        text.setAttribute("visible", true);
+      }
+    </script>
   </body>
 </html>
